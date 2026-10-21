@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="GRAIL 连接人工智能研究与交通信号优化，利用车联网导航轨迹与强化学习，支持路口协同、配时优化、方案部署与效果评估，为城市缓堵提供低成本、可持续的落地方案。" />
+    <title>GRAIL — Green-light Research and Applications through Intelligent Learning</title>
+    <link rel="icon" type="image/svg+xml" href="assets/grail-logo.svg?v=20261021-linked" />
+    <link rel="stylesheet" href="styles.css?v=20261021-cleanup" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="GRAIL 首页">
+        <img class="brand-mark" src="assets/grail-logo.svg?v=20261021-linked" width="26" height="26" alt="" aria-hidden="true" />
+        <span class="brand-name">GRAIL</span>
+      </a>
+      <nav class="primary-nav" aria-label="主导航">
+        <a href="#about">关于 GRAIL</a>
+        <a href="#cases">城市案例</a>
+        <a href="#capabilities">产品与方案</a>
+        <a href="#news">新闻资讯</a>
+        <a href="#papers">研究论文</a>
+      </nav>
+      <button class="menu-toggle" type="button" aria-label="打开菜单" aria-expanded="false"><span></span><span></span></button>
+    </header>
+
+    <main id="top">
+      <section class="hero" id="hero">
+        <img class="hero-city" src="assets/city-background.svg" alt="" aria-hidden="true" />
+        <div class="hero-glow"></div>
+        <div class="hero-inner">
+          <div class="hero-brand">
+            <img class="hero-signal" src="assets/grail-logo.svg?v=20261021-linked" width="82" height="82" alt="" aria-hidden="true" />
+            <h1 lang="en">GRAIL</h1>
+          </div>
+          <span class="hero-rule"></span>
+          <p class="hero-subtitle" lang="en">Green-light Research and Applications through Intelligent Learning</p>
+          <p class="hero-headline">用 AI 让城市交通信号更好地协同</p>
+          <p class="hero-copy">基于车辆导航轨迹，构建从交通流量还原、信号配时优化到方案部署与效果评估的闭环</p>
+        </div>
+      </section>
+
+      <section class="about-section section-shell" id="about" aria-label="项目介绍">
+        <div class="about-body">
+          <p>GRAIL（<span lang="en">Green-light Research and Applications through Intelligent Learning</span>）连接人工智能研究与交通信号优化，为城市级交通拥堵治理提供<strong>低成本、可持续的落地方案</strong>。</p>
+          <p>GRAIL 利用车联网导航轨迹估计现有信号配时方案与交通流量，通过强化学习选择适合协调优化的路口与干线。它不仅识别哪里拥堵，更进一步回答<strong>哪些路口应该一起协调、信号配时应该如何优化</strong>，并为信控方案部署与效果评估提供具体方案，将数据分析转化为道路上的实际改善。</p>
+          <p>截至 2026 年 10 月，项目已部署于中国 <strong>86 个城市和地区</strong>。对其中 <strong>23 个跟踪城市</strong>的优化前后对比显示，车均延误平均下降约 <strong>15%</strong>，停车次数平均下降约 <strong>13%</strong>。通过连接车联网数据、AI 与交通工程实践，GRAIL 帮助城市持续优化信号配时，让通行更顺畅、等待更少。</p>
+        </div>
+      </section>
+
+
+
+      <section class="city-section section-shell" id="cases">
+        <div class="section-heading"><div><p class="section-kicker">REAL-WORLD IMPACT</p><h2>城市应用与优化成效</h2></div></div>
+        <div class="impact-layout">
+          <div class="impact-map-card">
+            <svg id="impact-map" viewBox="0 0 760 550" role="group" aria-label="项目城市分布地图，区分有下发优化数据和暂无下发优化数据，点击圆点查看城市效果">
+              <image href="assets/maps/china-base.svg" width="760" height="550" aria-hidden="true" />
+              <g id="impact-markers"></g>
+              <g id="impact-selected-label" aria-hidden="true"><rect y="-18" height="26" rx="3" /><text text-anchor="middle" y="0"></text></g>
+            </svg>
+            <div class="impact-map-caption"><span id="impact-map-status" role="status"></span><span>点击城市，查看优化成效</span></div>
+            <div class="impact-legend" aria-label="图例">
+              <span>有数据：样本延误降幅</span>
+              <span><i style="background:var(--effect-low)"></i>&lt;10%</span>
+              <span><i style="background:var(--effect-medium)"></i>10–15%</span>
+              <span><i style="background:var(--effect-high)"></i>15–20%</span>
+              <span><i style="background:var(--effect-highest)"></i>≥20%</span>
+              <span><i class="legend-no-data"></i>暂无下发优化数据</span>
+            </div>
+          </div>
+          <aside class="impact-overview" aria-label="城市覆盖与优化效果汇总">
+            <div class="impact-overview-top">
+              <div id="impact-stats" class="impact-stats" aria-label="部署城市及地区、跟踪城市数与平均延误下降"></div>
+            </div>
+            <div class="impact-city-chart" aria-labelledby="city-ranking-title">
+              <div class="impact-chart-heading"><h3 id="city-ranking-title">下发城市优化效果</h3><span>延误降幅</span></div>
+              <div id="city-ranking" class="city-ranking"></div>
+            </div>
+          </aside>
+        </div>
+        <noscript><p>请启用 JavaScript 查看城市分布与优化效果。</p></noscript>
+      </section>
+
+      <section class="content-section products-section section-shell" id="capabilities" aria-labelledby="products-heading">
+        <div class="section-heading"><div><p class="section-kicker">PRODUCTS &amp; SOLUTIONS</p><h2 id="products-heading">产品与解决方案</h2></div><p class="section-note">从云端信号优化到全域交通治理。</p></div>
+        <div class="product-showcase">
+          <article class="product-feature">
+            <header class="product-card-heading">
+              <span class="product-index">PRODUCT / 01</span>
+              <h3>SaaS 信控</h3>
+            </header>
+            <div class="product-copy">
+              <p>以互联网交通数据与交通大模型，连接交通流量还原、规律分析、区域信号优化和效果评价。通过云端服务，让城市快速开展信号优化。</p>
+            </div>
+            <figure class="product-visual">
+              <img src="assets/products/saas-signal-interface.png" width="1730" height="1165" alt="SaaS 信控交通规律分析：路口流量、区域进出通道与拥堵分析示意图" loading="lazy" decoding="async" />
+            </figure>
+            <a class="product-link" href="https://cloud.baidu.com/product/jg-xk.html" target="_blank" rel="noopener noreferrer" aria-label="了解 SaaS 信控产品，百度智能云官网，新窗口打开">了解产品 <span aria-hidden="true">↗</span></a>
+          </article>
+          <article class="product-feature">
+            <header class="product-card-heading">
+              <span class="product-index">SOLUTION / 02</span>
+              <h3>全域信控缓堵解决方案</h3>
+            </header>
+            <div class="product-copy">
+              <p>融合互联网与专网感知数据，贯通交通诊断、点线面协同优化、效果评价与出行信息服务，形成面向城市交通治理的完整业务流程。</p>
+            </div>
+            <figure class="product-visual product-visual-architecture">
+              <img src="assets/products/signal-control-solution.png" width="1624" height="968" alt="全域信控方案架构：感知、统一管控、能力底座、业务应用与本地化服务" loading="lazy" decoding="async" />
+            </figure>
+            <a class="product-link" href="https://cloud.baidu.com/solution/signal-control.html" target="_blank" rel="noopener noreferrer" aria-label="查看全域信控缓堵解决方案，百度智能云官网，新窗口打开">查看解决方案 <span aria-hidden="true">↗</span></a>
+          </article>
+        </div>
+      </section>
+
+      <section class="news-section section-shell" id="news" aria-labelledby="news-heading">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker" lang="en">NEWS</p>
+            <h2 id="news-heading">新闻资讯</h2>
+          </div>
+        </div>
+        <div class="news-grid" id="news-grid"></div>
+        <p class="empty-state" hidden>暂无新闻。</p>
+        <div class="news-pagination">
+          <button class="news-more" type="button" aria-controls="news-grid">更多新闻 <span aria-hidden="true">↓</span></button>
+          <span class="news-count" role="status" aria-label="已显示新闻数量"></span>
+        </div>
+      </section>
+
+      <section class="papers-section section-shell" id="papers" aria-labelledby="papers-heading">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker" lang="en">PUBLICATIONS</p>
+            <h2 id="papers-heading">研究论文</h2>
+          </div>
+        </div>
+        <ul class="publication-list" role="list">
+          <li lang="en">
+            <h3>Network-wide critical routes identification and coordinated control based on automatic vehicle identification data</h3>
+            <p>Peng Chen · Jiaming Xu · Yu Mei · Lei Wei · Transportation Research Part C: Emerging Technologies, 2025, 172: 105019</p>
+          </li>
+          <li lang="en">
+            <h3>A link-based flow model with turn-level queue transmission and time-varying free-flow speed for urban road networks</h3>
+            <p>Lei Wei · S. Travis Waller · Yu Mei · Peng Chen · Yunpeng Wang · Meng Wang · Transportation Research Part C: Emerging Technologies, 2025, 170: 104937</p>
+          </li>
+          <li lang="en">
+            <h3>CrossLight: Offline-to-Online Reinforcement Learning for Cross-City Traffic Signal Control</h3>
+            <p>Qian Sun · Rui Zha · Le Zhang · Jingbo Zhou · Yu Mei · Zhiling Li · Hui Xiong · Proceedings of the 30th ACM SIGKDD Conference on Knowledge Discovery and Data Mining (KDD), 2024: 2765–2774</p>
+          </li>
+          <li lang="en">
+            <h3>A hierarchical control framework for alleviating network traffic bottleneck congestion using vehicle trajectory data</h3>
+            <p>Lei Wei · Peng Chen · Yu Mei · Jian Sun · Yunpeng Wang · Journal of Intelligent Transportation Systems, 2024, 28(6): 988–1010</p>
+          </li>
+          <li lang="en">
+            <h3>Irregular Traffic Time Series Forecasting Based on Asynchronous Spatio-Temporal Graph Convolutional Networks</h3>
+            <p>Weijia Zhang · Le Zhang · Jindong Han · Hao Liu · Yanjie Fu · Jingbo Zhou · Yu Mei · Hui Xiong · Proceedings of the 30th ACM SIGKDD Conference on Knowledge Discovery and Data Mining (KDD), 2024: 4302–4313</p>
+          </li>
+          <li lang="en">
+            <h3>Multi-Graph Convolutional Recurrent Network for Fine-Grained Lane-Level Traffic Flow Imputation</h3>
+            <p>Jingci Ming · Le Zhang · Wei Fan · Weijia Zhang · Yu Mei · Weicen Ling · Hui Xiong · 2022 IEEE International Conference on Data Mining (ICDM), 2022: 348–357</p>
+          </li>
+          <li lang="en">
+            <h3>Turn-level network traffic bottleneck identification using vehicle trajectory data</h3>
+            <p>Lei Wei · Peng Chen · Yu Mei · Yunpeng Wang · Transportation Research Part C: Emerging Technologies, 2022, 140: 103707</p>
+          </li>
+        </ul>
+      </section>
+      <section class="contact-section" id="contact" aria-labelledby="contact-heading">
+        <div class="contact-inner section-shell">
+          <div class="contact-copy">
+            <p class="section-kicker">合作交流</p>
+            <h2 id="contact-heading">让信号优化在你的城市落地</h2>
+            <p>了解适合本地道路的信号优化方案，一起探索更顺畅的城市通行。</p>
+          </div>
+          <div class="contact-action">
+            <a class="contact-button" href="mailto:whqyqy@hotmail.com" aria-label="联系我们，发送邮件至 whqyqy@hotmail.com">联系我们 <span aria-hidden="true">↗</span></a>
+            <p>whqyqy@hotmail.com</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="data/news.js?v=20261019-images8"></script>
+    <script src="app.js?v=20261016-news4"></script>
+    <script src="data/city-effects.js?v=20261021-cleanup"></script>
+    <script src="city-map.js?v=20261021-teal"></script>
+  </body>
+</html>
