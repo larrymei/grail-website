@@ -2,13 +2,26 @@
 (() => {
   const data = window.GRAIL_CITY_DATA;
   if (!data) return;
-  const { cities, summary } = data;
+  const english = document.documentElement.lang === 'en';
+  const { summary } = data;
+  const cities = data.cities.map(city => ({
+    ...city, name: english ? (window.GRAIL_EN?.cities[city.id] || city.name) : city.name
+  }));
+  const labels = english ? {
+    deployed: 'Cities & regions', tracked: 'Tracked cities', delay: 'Average delay reduction',
+    noData: 'Results not yet available', result: 'Measured delay reduction',
+    ranking: 'City results', select: 'Select to explore'
+  } : {
+    deployed: '部署城市及地区', tracked: '跟踪城市', delay: '平均延误下降',
+    noData: '暂无下发优化数据', result: '样本延误下降',
+    ranking: '下发城市优化效果', select: '点击查看'
+  };
   const markers = document.querySelector('#impact-markers');
   const ranking = document.querySelector('#city-ranking');
   const fmt = number => number.toFixed(2);
   const withData = cities.filter(city => city.hasEffectData);
-  const withoutData = cities.filter(city => !city.hasEffectData).sort((a,b) => a.name.localeCompare(b.name, 'zh-CN'));
-  const status = city => city.hasEffectData ? `样本延误下降 ${fmt(city.reduction)}%` : '暂无下发优化数据';
+  const withoutData = cities.filter(city => !city.hasEffectData).sort((a,b) => a.name.localeCompare(b.name, english ? 'en' : 'zh-CN'));
+  const status = city => city.hasEffectData ? `${labels.result} ${fmt(city.reduction)}%` : labels.noData;
   const color = value => value >= 20 ? 'var(--effect-highest)' : value >= 15 ? 'var(--effect-high)' : value >= 10 ? 'var(--effect-medium)' : 'var(--effect-low)';
   // Nearby Xi'an and Xianyang share a dense cluster. Leader lines keep the
   // original locations visible while giving each city a separate click target.
@@ -17,9 +30,9 @@
   let currentCity;
 
   document.querySelector('#impact-stats').innerHTML = [
-    [summary.cityCount, '部署城市及地区'],
-    [summary.withEffectCount, '跟踪城市'],
-    [fmt(summary.reduction)+'%', '平均延误下降']
+    [summary.cityCount, labels.deployed],
+    [summary.withEffectCount, labels.tracked],
+    [fmt(summary.reduction)+'%', labels.delay]
   ].map(([value,label]) => `<div class="impact-stat"><strong>${value}</strong><span>${label}</span></div>`).join('');
 
   markers.innerHTML = cities.filter(city => offsets[city.id]).map(city => {
@@ -28,7 +41,7 @@
   }).join('') + [...withoutData, ...withData].map(city => {
     const [x,y] = displayPoint(city);
     const radius = 5;
-    return `<g class="impact-pin" transform="translate(${x},${y})" data-city="${city.id}" tabindex="0" role="button" aria-pressed="false" aria-label="${city.name}，${status(city)}">
+    return `<g class="impact-pin" transform="translate(${x},${y})" data-city="${city.id}" tabindex="0" role="button" aria-pressed="false" aria-label="${city.name} · ${status(city)}">
       <title>${city.name} · ${status(city)}</title>
       <circle class="pin-hit" r="${Math.max(radius+3,10)}" fill="transparent"/>
       <circle class="pin-ring" r="${radius+3}"/>
@@ -42,7 +55,7 @@
     <span class="ranking-track"><i style="width:${Math.max(0, city.reduction)/chartMax*100}%;background:${color(city.reduction)}"></i></span>
     <strong>${fmt(city.reduction)}%</strong>
   </button>`).join('');
-  document.querySelector('#city-ranking-title').textContent = `下发城市优化效果 · ${withData.length}`;
+  document.querySelector('#city-ranking-title').textContent = `${labels.ranking} · ${withData.length}`;
 
   function showCity(id) {
     const city = cities.find(item => item.id === id);
@@ -59,9 +72,11 @@
     if (restoreFocus) selectedMarker.focus({preventScroll:true});
     const label = document.querySelector('#impact-selected-label');
     const [x,y] = displayPoint(city);
-    label.setAttribute('transform', `translate(${x},${y-23})`);
-    label.querySelector('text').textContent = city.name;
-    const width=city.name.length*13+20;
+    const labelText = label.querySelector('text');
+    labelText.textContent = city.name;
+    const width = labelText.getComputedTextLength() + 20;
+    const labelX = Math.max(width / 2 + 4, Math.min(756 - width / 2, x));
+    label.setAttribute('transform', `translate(${labelX},${Math.max(22, y-23)})`);
     label.querySelector('rect').setAttribute('width',width);
     label.querySelector('rect').setAttribute('x',-width/2);
     document.querySelector('#impact-map-status').textContent = `${city.name} · ${status(city)}`;
@@ -89,7 +104,7 @@
     const item=event.target.closest('[data-city]');
     if (!item) return;
     const city=cities.find(c => c.id===item.dataset.city);
-    document.querySelector('#impact-map-status').textContent=`${city.name} · ${status(city)} · 点击查看`;
+    document.querySelector('#impact-map-status').textContent=`${city.name} · ${status(city)} · ${labels.select}`;
   });
   markers.addEventListener('pointerleave',() => {
     document.querySelector('#impact-map-status').textContent=`${currentCity.name} · ${status(currentCity)}`;

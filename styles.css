@@ -36,6 +36,15 @@ main > .section-shell + .section-shell { border-top: 1px solid var(--line); }
 .primary-nav a.active { font-weight: 600; }
 .menu-toggle { display: none; background: none; border: 0; padding: 8px; }
 .menu-toggle span { width: 24px; height: 1px; display: block; background: var(--ink); margin: 5px; }
+.site-header { gap: 24px; }
+.primary-nav { margin-left: auto; }
+.header-actions { display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
+.language-switch { display: flex; align-items: center; gap: 9px; font-size: 12px; white-space: nowrap; }
+.language-switch a { color: var(--muted); padding: 10px 2px; }
+.language-switch a[aria-current], .language-switch a:hover { color: var(--brand); }
+.language-switch a[aria-current] { font-weight: 600; }
+.language-switch > span { color: #c6cdd1; }
+.site-header a:focus-visible, .menu-toggle:focus-visible { outline: 2px solid var(--focus); outline-offset: 4px; }
 
 .hero { min-height: 400px; padding: 36px 0; position: relative; overflow: hidden; background: linear-gradient(180deg, #fafbfc, #fff); display: grid; place-items: center; }
 .hero-city { position: absolute; inset: auto 0 0; width: 100%; height: min(360px, 100%); opacity: .3; object-fit: cover; }
@@ -85,6 +94,7 @@ main > .section-shell + .section-shell { border-top: 1px solid var(--line); }
 .news-section :is(a, button, article):focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
 .news-card:focus { scroll-margin-top: 90px; }
 .empty-state { text-align: center; color: var(--muted); padding: 35px; }
+.news-language-note { margin: -12px 0 24px; color: var(--muted); font-size: 12px; line-height: 1.7; }
 #contact { scroll-margin-top: 95px; }
 
 @media (max-width: 1050px) {
@@ -185,6 +195,7 @@ main > .section-shell + .section-shell { border-top: 1px solid var(--line); }
 .product-copy p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.85; }
 .product-link { grid-area: link; display: flex; align-items: center; justify-content: space-between; gap: 18px; color: var(--brand); font-size: 13px; font-weight: 500; padding-top: 14px; border-top: 1px solid var(--line); }
 .product-link span { font-size: 17px; transition: transform .2s; }
+.product-link small { margin-left: auto; color: var(--muted); font-size: 10px; font-weight: 400; }
 .product-link:hover span { transform: translate(2px, -2px); }
 .product-link:focus-visible { outline: 2px solid var(--focus); outline-offset: 5px; }
 .product-visual { grid-area: visual; align-self: center; min-width: 0; height: 144px; margin: 0; padding: 6px; background: #f7f9fc; border-radius: 6px; }
@@ -193,6 +204,35 @@ main > .section-shell + .section-shell { border-top: 1px solid var(--line); }
 @media (max-width: 900px) {
   .product-showcase { grid-template-columns: minmax(0, 1fr); gap: 20px; }
   .product-feature { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+}
+
+/* English uses the same visual system, with room for longer words and labels. */
+html:lang(en) .hero-headline { max-width: 780px; margin-inline: auto; line-height: 1.22; letter-spacing: -.035em; }
+html:lang(en) .hero-copy { max-width: 700px; line-height: 1.75; }
+html:lang(en) .about-body { font-size: clamp(16px, 1.4vw, 18px); line-height: 1.85; }
+html:lang(en) .section-heading { gap: 28px; }
+html:lang(en) .section-heading h2 { line-height: 1.2; text-wrap: balance; }
+html:lang(en) .section-note { max-width: 250px; flex-shrink: 0; }
+html:lang(en) .ranking-row { grid-template-columns: 88px minmax(25px, 1fr) 52px; }
+html:lang(en) .impact-stat span { line-height: 1.5; }
+html:lang(en) .product-visual { height: 166px; padding: 0; }
+html:lang(en) .news-card h3 { line-height: 1.45; overflow-wrap: normal; }
+html:lang(en) .news-summary { line-height: 1.7; overflow-wrap: normal; }
+html:lang(en) .news-card-footer a { font-size: 12px; }
+
+@media (min-width: 681px) and (max-width: 950px) {
+  .site-header { gap: 18px; padding-inline: 24px; }
+  .primary-nav { gap: 16px; font-size: 12px; }
+}
+@media (max-width: 680px) {
+  .site-header { gap: 12px; }
+  .primary-nav { margin-left: 0; }
+  .header-actions { gap: 10px; }
+  html:lang(en) .hero-headline { font-size: clamp(27px, 6vw, 36px); }
+  html:lang(en) .hero-copy { padding-inline: 0; }
+  html:lang(en) .section-heading h2 { font-size: 28px; }
+  html:lang(en) .section-note { max-width: 100%; }
+  html:lang(en) .news-language-note { margin-top: -8px; }
 }
 @media (max-width: 680px) {
   .product-showcase { margin-top: 24px; }

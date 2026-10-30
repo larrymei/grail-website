@@ -8,6 +8,11 @@
 !/city-map.js
 !/index.html
 !/styles.css
+!/sitemap.xml
+!/indexnow-key.txt
+!/en/
+/en/*
+!/en/index.html
 !/assets/
 /assets/*
 !/assets/city-background.svg
@@ -18,9 +23,11 @@
 /data/*
 !/data/city-effects.js
 !/data/news.js
+!/data/en.js
 !/assets/maps/
 /assets/maps/*
 !/assets/maps/china-base.svg
+!/assets/maps/china-base-en.svg
 !/assets/news/
 /assets/news/*
 !/assets/news/case.svg
@@ -30,6 +37,8 @@
 /assets/products/*
 !/assets/products/saas-signal-interface.png
 !/assets/products/signal-control-solution.png
+!/assets/products/cloud-signal-en.svg
+!/assets/products/city-coordination-en.svg
 !/content/news/
 /content/news/*
 !/content/news/2024-12-25-haikou-saas/
